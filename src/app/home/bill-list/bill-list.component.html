@@ -1,0 +1,8 @@
+<div *ngIf="bills">
+
+  <ul>
+    <li *ngFor="let bill of bills.content">{{bill.title}}</li>
+  </ul>
+
+  <app-pagination [page]="bills" (pageSelected)="loadPage($event)"></app-pagination>
+</div>

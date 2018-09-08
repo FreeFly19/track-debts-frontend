@@ -1,0 +1,17 @@
+<div class="offset-2 col-8 offset-3 col-6 offset-lg-4 col-lg-4">
+  <section>
+    <h1 class="card-header">Track Debts</h1>
+
+    <form id="sign-in-panel" [formGroup]="loginForm" (submit)="login()">
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input class="form-control" id="username" type="text" formControlName="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" id="password" type="text" formControlName="password">
+      </div>
+      <button class="btn btn-block btn-lg btn-primary">Sign In</button>
+    </form>
+  </section>
+</div>

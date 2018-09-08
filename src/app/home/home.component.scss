@@ -1,0 +1,20 @@
+header.navbar {
+  background: linear-gradient(135deg,#0143a3,#0273d4);
+
+  .navbar-brand img {
+    height: 30px;
+    width: 30px;
+  }
+
+  .user-info {
+    margin-left: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    .username {
+      font-size: 1.3em;
+      color: white;
+    }
+  }
+}

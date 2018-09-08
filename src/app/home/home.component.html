@@ -1,0 +1,21 @@
+<header class="navbar navbar-expand navbar-dark px-4 flex-column flex-sm-row">
+  <a routerLink="/" class="navbar-brand mr-2">
+    <span class="ml-2 d-xl-none d-lg-none d-md-none d-sm-none d-inline">Track Debts</span>
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav flex-row">
+      <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/bills">Bills</a></li>
+      <li class="nav-item"><a class="nav-link" style="cursor: not-allowed" routerLinkActive="active" routerLink="/transactions">Transactions</a></li>
+      <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/layouts">Layouts</a></li>
+    </ul>
+  </div>
+
+  <div class="user-info">
+    <span class="username">{{username}}</span>
+    &nbsp;&nbsp;
+    <button class="btn btn-light btn-sm" (click)="logout()">Logout</button>
+  </div>
+</header>
+
+<router-outlet></router-outlet>

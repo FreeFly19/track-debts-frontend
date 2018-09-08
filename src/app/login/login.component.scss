@@ -1,0 +1,10 @@
+@import '../../styles';
+
+#sign-in-panel {
+  @extend .card-body;
+}
+
+section {
+  @extend .card;
+  margin: 100px auto;
+}

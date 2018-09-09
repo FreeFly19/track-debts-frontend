@@ -14,6 +14,9 @@
     </tr>
     </thead>
     <tbody>
+    <tr *ngIf="bills.content.length === 0">
+      <td colspan="4">There are no bills added yet</td>
+    </tr>
     <tr *ngFor="let bill of bills.content">
       <td><a [routerLink]="['/', 'bill', bill.id]">{{bill.title}}</a></td>
       <td>{{bill.createdBy.email}}</td>

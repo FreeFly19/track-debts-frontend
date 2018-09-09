@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bill} from '../../../core/bill/bill';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AddBillCommand} from '../../../core/bill/create-bill-command';
+import {AddBillCommand} from '../../../core/bill/add-bill-command';
 
 @Component({
   selector: 'app-bill-form',

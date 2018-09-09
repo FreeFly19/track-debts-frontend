@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AddBillCommand} from '../../../core/bill/create-bill-command';
+import {AddBillCommand} from '../../../core/bill/add-bill-command';
 import {Router} from '@angular/router';
 import {Bill} from '../../../core/bill/bill';
 

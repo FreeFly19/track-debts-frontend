@@ -1,0 +1,13 @@
+<form (submit)="submit()" [formGroup]="billForm">
+  <div class="form-group">
+    <label for="bill-form-title">Title</label>
+    <input class="form-control" type="text" id="bill-form-title" formControlName="title">
+  </div>
+
+  <div class="form-group">
+    <label for="bill-form-date">Date</label>
+    <input class="form-control" type="number" id="bill-form-date" formControlName="date">
+  </div>
+
+  <button class="btn btn-primary">{{bill ? 'Update' : 'Create'}}</button>
+</form>

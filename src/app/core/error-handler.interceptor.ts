@@ -28,7 +28,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           this.toastr.error('Not Found', 'Error');
         } else if (err.status === 500) {
           this.toastr.error('Server raised error, please notify support team', 'Error');
-        } else if (err.status === 504) {
+        } else if (err.status === 502 || err.status === 504) {
           this.toastr.error('Backend server is unreachable', 'Error');
         }
 

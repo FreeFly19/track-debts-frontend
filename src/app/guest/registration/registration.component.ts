@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../core/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,8 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private userService: UserService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -26,7 +28,10 @@ export class RegistrationComponent implements OnInit {
 
   register() {
     this.userService.register(this.registrationForm.value)
-      .subscribe(() => this.router.navigate(['/', 'guest']));
+      .subscribe(() => {
+        this.toastr.success('Successfully registered!');
+        this.router.navigate(['/', 'guest']);
+      });
   }
 
   passwordConfirming(c: AbstractControl): { invalid: boolean } {

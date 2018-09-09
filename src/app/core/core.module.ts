@@ -6,12 +6,17 @@ import {TokenInterceptor} from './token-interceptor';
 import {GuestGuard} from './guest.guard';
 import {UserGuard} from './user.guard';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ErrorHandlerInterceptor} from './error-handler.interceptor';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     NgbModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   declarations: [],
   providers: [
@@ -19,7 +24,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     GuestGuard,
     UserService,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true}
   ]
 })
 export class CoreModule {

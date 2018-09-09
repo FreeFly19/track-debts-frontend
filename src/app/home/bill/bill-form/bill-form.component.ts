@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bill} from '../../../core/bill/bill';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CreateBillCommand} from '../../../core/bill/create-bill-command';
+import {AddBillCommand} from '../../../core/bill/create-bill-command';
 
 @Component({
   selector: 'app-bill-form',
@@ -12,7 +12,7 @@ export class BillFormComponent implements OnInit {
   bill?: Bill;
 
   @Output()
-  created: EventEmitter<CreateBillCommand> = new EventEmitter();
+  created: EventEmitter<AddBillCommand> = new EventEmitter();
 
   billForm: FormGroup;
 

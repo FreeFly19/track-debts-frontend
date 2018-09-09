@@ -1,14 +1,30 @@
-<a [routerLink]="['/', 'create-bill']">Add Bill</a>
-
 <div *ngIf="!bills">
   Loading...
 </div>
 
 <div *ngIf="bills">
 
-  <ul>
-    <li *ngFor="let bill of bills.content">{{bill.title}} Created By {{bill.createdBy.email}}</li>
-  </ul>
+  <table class="table table-striped text-center">
+    <thead>
+    <tr>
+      <th>Bill</th>
+      <th>Initiator</th>
+      <th>Date</th>
+      <th>Created</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bill of bills.content">
+      <td><a [routerLink]="['/', 'bill', bill.id]">{{bill.title}}</a></td>
+      <td>{{bill.createdBy.email}}</td>
+      <td>{{bill.date | date: 'dd-MM-yyyy'}}</td>
+      <td>{{bill.createdAt | date: 'dd-MM-yyyy HH:mm:mm'}}</td>
+    </tr>
+    <tr>
+      <td colspan="4" class="text-right"><button class="btn btn-primary" [routerLink]="['/', 'create-bill']">Add Bill</button></td>
+    </tr>
+    </tbody>
+  </table>
 
   <app-pagination [page]="bills" (pageSelected)="loadPage($event)"></app-pagination>
 </div>

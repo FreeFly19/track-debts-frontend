@@ -1,0 +1,44 @@
+<div *ngIf="bill">
+  <h2>#{{bill.id}} {{bill.title}}</h2>
+
+  <table class="bill-general">
+    <tr>
+      <td class="text-right">Date</td>
+      <th>{{bill.date | date:'yyyy-MM-dd'}}</th>
+    </tr>
+    <tr>
+      <td class="text-right">Initiator</td>
+      <th>{{bill.createdBy.email}}</th>
+    </tr>
+  </table>
+
+  <table class="table table-striped text-center">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Amount</th>
+      <th>Cost</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngIf="bill.items.length === 0">
+      <td colspan="4">There are no items added yet</td>
+    </tr>
+    <tr *ngFor="let item of bill.items">
+      <td>{{item.title}}</td>
+      <td>{{item.amount}}</td>
+      <td>{{item.cost}}</td>
+      <td>X</td>
+    </tr>
+    <tr>
+      <td><input type="text" id="title" #title></td>
+      <td><input type="text" id="amount" #amount></td>
+      <td><input type="text" id="cost" #cost></td>
+      <td>
+        <button class="btn btn-success" (click)="addItem({title: title.value, amount: amount.value, cost: cost.value})">+</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

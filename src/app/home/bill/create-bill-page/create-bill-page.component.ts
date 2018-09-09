@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CreateBillCommand} from '../../../core/bill/create-bill-command';
+import {AddBillCommand} from '../../../core/bill/create-bill-command';
 import {Router} from '@angular/router';
 import {Bill} from '../../../core/bill/bill';
 
@@ -16,7 +16,7 @@ export class CreateBillPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCreate(cmd: CreateBillCommand) {
+  onCreate(cmd: AddBillCommand) {
     this.http.post<Bill>('/api/bills', cmd)
       .subscribe(bill => this.router.navigate(['/', 'bill', bill.id]));
   }

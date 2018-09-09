@@ -6,7 +6,7 @@ import {Bill} from '../../../core/bill/bill';
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list-page.component.html',
-  styleUrls: ['./bill-list-page.component.css']
+  styleUrls: ['./bill-list-page.component.scss']
 })
 export class BillListPageComponent implements OnInit {
   bills: Page<Bill>;

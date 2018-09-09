@@ -6,10 +6,10 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class UserService {
   token?: string;
-  username?: string;
+  email?: string;
 
   constructor(private http: HttpClient) {
-    this.username = window.localStorage.getItem('email');
+    this.email = window.localStorage.getItem('email');
     this.token = window.localStorage.getItem('token');
   }
 
@@ -18,26 +18,26 @@ export class UserService {
       .pipe(
         map(tokenDto => tokenDto.token),
         map(token => {
-          window.localStorage.setItem('email', loginCommand.username);
+          window.localStorage.setItem('email', loginCommand.email);
           window.localStorage.setItem('token', token);
           this.token = token;
-          this.username = loginCommand.username;
+          this.email = loginCommand.email;
           return token;
         }));
   }
 
   loggedIn(): boolean {
-    return this.token && this.username && true;
+    return this.token && this.email && true;
   }
 
   logout(): Observable<string> {
     return Observable.create((observer) => {
-      const username = this.username;
-      this.username = null;
+      const email = this.email;
+      this.email = null;
       this.token = null;
       window.localStorage.removeItem('email');
       window.localStorage.removeItem('token');
-      observer.next(username);
+      observer.next(email);
       observer.complete();
     });
   }

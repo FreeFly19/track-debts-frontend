@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  username: string;
+  email: string;
 
   constructor(
     private userService: UserService,
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.username = this.userService.username;
+    this.email = this.userService.email;
   }
 
   logout() {

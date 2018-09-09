@@ -1,0 +1,29 @@
+<div class="offset-2 col-8 offset-3 col-6 offset-lg-4 col-lg-4">
+  <section>
+    <div class="card-header">
+      <h1 style="flex-grow: 1">Registration</h1>
+      <div>
+        <a [routerLink]="['..']"
+           [queryParams]="registrationForm.get('email').value ? {email: registrationForm.get('email').value} : {}">
+          Already have an account
+        </a>
+      </div>
+    </div>
+
+    <form id="sign-in-panel" [formGroup]="registrationForm" (submit)="register()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" type="text" formControlName="email" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" id="password" type="password" formControlName="password" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label for="password2">Confirm password</label>
+        <input class="form-control" id="password2" type="password" formControlName="password2" autocomplete="new-password">
+      </div>
+      <button class="btn btn-block btn-lg btn-success">Sign Up</button>
+    </form>
+  </section>
+</div>

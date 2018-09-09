@@ -41,4 +41,8 @@ export class UserService {
       observer.complete();
     });
   }
+
+  register(registerCommand) {
+    return this.http.post<any>('/api/users', registerCommand);
+  }
 }

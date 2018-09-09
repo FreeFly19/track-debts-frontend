@@ -16,7 +16,7 @@ import {UserGuard} from './core/user.guard';
     BrowserModule,
     RouterModule.forRoot([
       {path: '', loadChildren: './home/home.module#HomeModule', canActivate: [UserGuard]},
-      {path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [GuestGuard]},
+      {path: 'guest', loadChildren: './guest/guest.module#GuestModule', canActivate: [GuestGuard]},
       {path: '**', redirectTo: '/'}
     ])
   ],

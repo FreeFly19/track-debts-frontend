@@ -12,7 +12,7 @@ export class UserGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.userService.loggedIn()) {
-      this.router.navigate(['/', 'login']);
+      this.router.navigate(['/', 'guest']);
       return false;
     }
     return true;

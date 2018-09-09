@@ -7,4 +7,9 @@
 section {
   @extend .card;
   margin: 100px auto;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+  }
 }

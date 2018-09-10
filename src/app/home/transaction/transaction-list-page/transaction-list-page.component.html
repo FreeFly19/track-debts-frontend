@@ -2,6 +2,32 @@
   Loading...
 </div>
 <div *ngIf="transactions">
+  <div class="card">
+    <div class="card-header">Accept Payment</div>
+    <div class="card-body">
+      <form (submit)="acceptMoney()" [formGroup]="acceptMoneyForm">
+        <div class="form-group">
+          <label for="senderId">Sender</label>
+          <select class="form-control" id="senderId" formControlName="senderId"
+                  [class.is-invalid]="acceptMoneyForm.get('senderId').dirty && acceptMoneyForm.get('senderId').invalid">
+            <option value="" selected>Select User</option>
+            <option *ngFor="let u of users" [ngValue]="u.id">{{u.email}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" class="form-control" id="amount" formControlName="amount"
+                 [class.is-invalid]="acceptMoneyForm.get('amount').dirty && acceptMoneyForm.get('amount').invalid">
+        </div>
+        <div class="text-right">
+          <button class="btn btn-primary" [disabled]="acceptMoneyForm.disabled || acceptMoneyForm.invalid">Accept</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br>
+
   <table class="table table-striped text-center">
     <thead>
     <tr>
@@ -20,7 +46,7 @@
       <td>{{t.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
       <td>
         <a *ngIf="t.bill" [routerLink]="['/', 'bill', t.bill.id]">#{{t.bill.id}} {{t.bill.title}}</a>
-        <span *ngIf="!t.bill">–</span>
+        <span *ngIf="!t.bill">Manual</span>
       </td>
     </tr>
     </tbody>

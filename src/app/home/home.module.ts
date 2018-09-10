@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CreateBillPageComponent} from './bill/create-bill-page/create-bill-page.component';
 import {BillListPageComponent} from './bill/bill-list-page/bill-list-page.component';
 import {BillPageComponent} from './bill/bill-page/bill-page.component';
+import { TransactionListPageComponent } from './transaction/transaction-list-page/transaction-list-page.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import {BillPageComponent} from './bill/bill-page/bill-page.component';
           {path: '', redirectTo: 'bills'},
           {path: 'bills', component: BillListPageComponent},
           {path: 'create-bill', component: CreateBillPageComponent},
-          {path: 'bill/:id', component: BillPageComponent}
+          {path: 'bill/:id', component: BillPageComponent},
+          {path: 'transactions', component: TransactionListPageComponent}
         ]
       }
     ])
@@ -32,7 +34,8 @@ import {BillPageComponent} from './bill/bill-page/bill-page.component';
     BillPageComponent,
     BillFormComponent,
     BillListPageComponent,
-    CreateBillPageComponent
+    CreateBillPageComponent,
+    TransactionListPageComponent
   ]
 })
 export class HomeModule {

@@ -1,5 +1,6 @@
 <div *ngIf="bill">
   <h2>#{{bill.id}} {{bill.title}}</h2>
+  <button class="btn btn-warning" (click)="lock()">Lock</button>
 
   <table class="bill-general">
     <tr>
@@ -18,25 +19,37 @@
       <th>Title</th>
       <th>Amount</th>
       <th>Cost</th>
+      <th>Participants</th>
       <th></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngIf="bill.items.length === 0">
-      <td colspan="4">There are no items added yet</td>
+      <td colspan="5">There are no items added yet</td>
     </tr>
     <tr *ngFor="let item of bill.items">
       <td>{{item.title}}</td>
       <td>{{item.amount}}</td>
       <td>{{item.cost}}</td>
-      <td>X</td>
+      <td>
+        <div *ngFor="let p of item.participants">
+          {{p.user.email}} – <b>{{p.coefficient}}</b>
+        </div>
+        <button class="btn btn-link" (click)="setCoefficient(item, '1')">+</button>
+      </td>
+      <td>
+        <button class="btn btn-danger">Drop</button>
+      </td>
     </tr>
     <tr>
       <td><input type="text" id="title" #title></td>
       <td><input type="text" id="amount" #amount></td>
       <td><input type="text" id="cost" #cost></td>
+      <td>No Attached Participants</td>
       <td>
-        <button class="btn btn-success" (click)="addItem({title: title.value, amount: amount.value, cost: cost.value})">+</button>
+        <button class="btn btn-success" (click)="addItem({title: title.value, amount: amount.value, cost: cost.value})">
+          Add
+        </button>
       </td>
     </tr>
     </tbody>

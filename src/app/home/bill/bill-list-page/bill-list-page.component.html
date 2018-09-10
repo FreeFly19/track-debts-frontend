@@ -21,7 +21,7 @@
       <td><a [routerLink]="['/', 'bill', bill.id]">{{bill.title}}</a></td>
       <td>{{bill.createdBy.email}}</td>
       <td>{{bill.date | date: 'dd-MM-yyyy'}}</td>
-      <td>{{bill.createdAt | date: 'dd-MM-yyyy HH:mm:mm'}}</td>
+      <td>{{bill.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
     </tr>
     <tr>
       <td colspan="4" class="text-right"><button class="btn btn-primary" [routerLink]="['/', 'create-bill']">Add Bill</button></td>

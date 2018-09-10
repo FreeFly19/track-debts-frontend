@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Bill} from '../../../core/bill/bill';
 import {AddBillItemCommand} from '../../../core/bill/add-bill-item-command';
+import {BillItem} from '../../../core/bill/bill-item';
 
 @Component({
   selector: 'app-create-bill-page',
@@ -27,4 +28,13 @@ export class BillPageComponent implements OnInit {
 
   }
 
+  setCoefficient(item: BillItem, coefficient: string) {
+    this.http.put(`/api/bills/${this.bill.id}/items/${item.id}/participate`, {coefficient})
+      .subscribe(() => this.ngOnInit());
+  }
+
+  lock() {
+    this.http.put(`/api/bills/${this.bill.id}/lock`, {})
+      .subscribe(() => this.ngOnInit());
+  }
 }

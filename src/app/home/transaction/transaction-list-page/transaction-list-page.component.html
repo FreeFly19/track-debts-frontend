@@ -1,0 +1,30 @@
+<div *ngIf="!transactions">
+  Loading...
+</div>
+<div *ngIf="transactions">
+  <table class="table table-striped text-center">
+    <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Bill</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let t of transactions.content">
+      <td>{{t.sender.email}}</td>
+      <td>{{t.receiver.email}}</td>
+      <td>{{t.amount}}</td>
+      <td>{{t.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
+      <td>
+        <a *ngIf="t.bill" [routerLink]="['/', 'bill', t.bill.id]">#{{t.bill.id}} {{t.bill.title}}</a>
+        <span *ngIf="!t.bill">–</span>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+  <app-pagination [page]="transactions" (pageSelected)="loadPage($event)"></app-pagination>
+</div>

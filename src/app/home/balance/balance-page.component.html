@@ -1,0 +1,14 @@
+<table class="table table-striped text-center">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Money</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let b of balanceItems">
+    <td>{{b.user.email}}</td>
+    <td [class.text-danger]="b.balance < 0" [class.text-success]="b.balance > 0">{{b.balance}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.email = this.userService.email;
+    this.email = this.userService.currentUser.email;
   }
 
   logout() {

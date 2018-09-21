@@ -5,6 +5,7 @@ export interface Bill {
   title: string;
   date: number;
   createdAt: number;
+  locked: boolean;
   createdBy: User;
   items: BillItem[];
 }

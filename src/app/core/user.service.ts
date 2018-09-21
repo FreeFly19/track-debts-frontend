@@ -5,39 +5,38 @@ import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
+  currentUser?: User;
   token?: string;
-  email?: string;
 
   constructor(private http: HttpClient) {
-    this.email = window.localStorage.getItem('email');
+    this.currentUser = JSON.parse(window.localStorage.getItem('user'));
     this.token = window.localStorage.getItem('token');
   }
 
   login(loginCommand: any): Observable<string> {
     return this.http.post<any>('/api/users/token', loginCommand)
       .pipe(
-        map(tokenDto => tokenDto.token),
-        map(token => {
-          window.localStorage.setItem('email', loginCommand.email);
-          window.localStorage.setItem('token', token);
-          this.token = token;
-          this.email = loginCommand.email;
-          return token;
+        map(tokenDto => {
+          this.token = tokenDto.token;
+          this.currentUser = { id: tokenDto.id, email: tokenDto.email };
+          window.localStorage.setItem('user', JSON.stringify(this.currentUser));
+          window.localStorage.setItem('token', tokenDto.token);
+          return tokenDto;
         }));
   }
 
   loggedIn(): boolean {
-    return this.token && this.email && true;
+    return this.token && this.currentUser && true;
   }
 
   logout(): Observable<string> {
     return Observable.create((observer) => {
-      const email = this.email;
-      this.email = null;
+      const user = this.currentUser;
+      this.currentUser = null;
       this.token = null;
-      window.localStorage.removeItem('email');
+      window.localStorage.removeItem('user');
       window.localStorage.removeItem('token');
-      observer.next(email);
+      observer.next(user);
       observer.complete();
     });
   }

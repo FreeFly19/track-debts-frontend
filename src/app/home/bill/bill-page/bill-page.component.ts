@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Bill} from '../../../core/bill/bill';
 import {AddBillItemCommand} from '../../../core/bill/add-bill-item-command';
 import {BillItem} from '../../../core/bill/bill-item';
+import {UserService} from '../../../core/user.service';
 
 @Component({
   selector: 'app-create-bill-page',
@@ -14,6 +15,7 @@ export class BillPageComponent implements OnInit {
   bill?: Bill;
 
   constructor(private http: HttpClient,
+              private userService: UserService,
               private router: Router,
               private route: ActivatedRoute) {}
 
@@ -36,5 +38,9 @@ export class BillPageComponent implements OnInit {
   lock() {
     this.http.put(`/api/bills/${this.bill.id}/lock`, {})
       .subscribe(() => this.ngOnInit());
+  }
+
+  isBillCreator() {
+    return this.userService.currentUser.id === this.bill.createdBy.id;
   }
 }

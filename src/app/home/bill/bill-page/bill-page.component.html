@@ -1,6 +1,8 @@
 <div *ngIf="bill">
-  <h2>#{{bill.id}} {{bill.title}}</h2>
-  <button class="btn btn-warning" (click)="lock()">Lock</button>
+  <div style="display:flex;justify-content: space-between;">
+    <h2>#{{bill.id}} {{bill.title}}</h2>
+    <button *ngIf="isBillCreator()" class="btn btn-warning" [disabled]="bill.locked" (click)="lock()">Lock<span *ngIf="bill.locked">ed</span></button>
+  </div>
 
   <table class="bill-general">
     <tr>
@@ -35,13 +37,13 @@
         <div *ngFor="let p of item.participants">
           {{p.user.email}} – <b>{{p.coefficient}}</b>
         </div>
-        <button class="btn btn-link" (click)="setCoefficient(item, '1')">+</button>
+        <button class="btn btn-link" *ngIf="!bill.locked" (click)="setCoefficient(item, '1')">+</button>
       </td>
       <td>
-        <button class="btn btn-danger">Drop</button>
+        <button class="btn btn-danger" [disabled]="bill.locked">Drop</button>
       </td>
     </tr>
-    <tr>
+    <tr *ngIf="!bill.locked">
       <td><input type="text" id="title" #title></td>
       <td><input type="text" id="amount" #amount></td>
       <td><input type="text" id="cost" #cost></td>

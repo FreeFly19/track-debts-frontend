@@ -1,7 +1,7 @@
 <div *ngIf="bill">
   <div style="display:flex;justify-content: space-between;">
     <h2>#{{bill.id}} {{bill.title}}</h2>
-    <button *ngIf="isBillCreator()" class="btn btn-warning" [disabled]="bill.locked" (click)="lock()">Lock<span *ngIf="bill.locked">ed</span></button>
+    <button class="btn btn-warning" [disabled]="bill.locked || !isBillCreator()" (click)="lock()">Lock<span *ngIf="bill.locked">ed</span></button>
   </div>
 
   <table class="bill-general">

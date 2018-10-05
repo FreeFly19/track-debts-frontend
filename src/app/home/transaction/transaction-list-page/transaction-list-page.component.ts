@@ -44,7 +44,6 @@ export class TransactionListPageComponent implements OnInit {
       .map(p => p.routeConfig ? p.routeConfig.path : '/')
       .filter(s => s);
 
-    console.log(path);
     this.router.navigate(path, {queryParams: {page: page}});
   }
 

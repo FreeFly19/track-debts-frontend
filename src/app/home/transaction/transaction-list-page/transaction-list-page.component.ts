@@ -3,6 +3,9 @@ import {Transaction} from '../../../core/transaction';
 import {HttpClient} from '@angular/common/http';
 import {Page} from '../../../core/page';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-transaction-list-page',
@@ -14,11 +17,18 @@ export class TransactionListPageComponent implements OnInit {
   acceptMoneyForm: FormGroup;
 
   constructor(private http: HttpClient,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get<Page<Transaction>>('/api/transactions')
-      .subscribe(transactions => this.transactions = transactions);
+    this.route.queryParams
+      .pipe(
+        map(params => Object.assign({}, {page: 1}, params)),
+        tap(params => params.page = params.page - 1),
+        switchMap(params => this.http.get<Page<Transaction>>('/api/transactions?size=10&page=' + params.page))
+      )
+      .subscribe(np => this.transactions = np);
 
     this.http.get<User[]>('/api/users')
       .subscribe(users => this.users = users);
@@ -30,7 +40,12 @@ export class TransactionListPageComponent implements OnInit {
   }
 
   loadPage(page) {
-    console.log(page);
+    const path = this.route.snapshot.pathFromRoot
+      .map(p => p.routeConfig ? p.routeConfig.path : '/')
+      .filter(s => s);
+
+    console.log(path);
+    this.router.navigate(path, {queryParams: {page: page}});
   }
 
   acceptMoney() {

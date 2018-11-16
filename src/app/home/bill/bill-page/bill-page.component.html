@@ -22,7 +22,7 @@
       <th>Amount</th>
       <th>Cost</th>
       <th>Participants</th>
-      <th></th>
+      <th *ngIf="!bill.locked"></th>
     </tr>
     </thead>
     <tbody>
@@ -39,8 +39,8 @@
         </div>
         <button class="btn btn-link" *ngIf="!bill.locked" (click)="setCoefficient(item, '1')">+</button>
       </td>
-      <td>
-        <button class="btn btn-danger" [disabled]="bill.locked">Drop</button>
+      <td *ngIf="!bill.locked">
+        <button class="btn btn-danger">Drop</button>
       </td>
     </tr>
     <tr *ngIf="!bill.locked">

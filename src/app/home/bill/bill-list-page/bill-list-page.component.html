@@ -7,11 +7,13 @@
   <table class="table table-striped text-center">
     <thead>
     <tr>
-      <th>Status</th>
-      <th>Bill</th>
-      <th>Initiator</th>
-      <th>Date</th>
-      <th>Created</th>
+      <th style="vertical-align: middle">Status</th>
+      <th style="vertical-align: middle">Bill</th>
+      <th style="vertical-align: middle">Initiator</th>
+      <th style="vertical-align: middle">
+        <div>Bill Date</div>
+        <div style="font-size: 0.6em;">Creation date</div>
+      </th>
     </tr>
     </thead>
     <tbody>
@@ -22,8 +24,10 @@
       <td>{{bill.locked ? 'Locked' : 'Active'}}</td>
       <td><a [routerLink]="['/', 'bill', bill.id]">{{bill.title}}</a></td>
       <td>{{bill.createdBy.email}}</td>
-      <td>{{bill.date | date: 'dd-MM-yyyy'}}</td>
-      <td>{{bill.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
+      <td>
+        <div>{{bill.date | date: 'dd-MM-yyyy'}}</div>
+        <div style="font-size: 0.6em;">{{bill.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</div>
+      </td>
     </tr>
     <tr>
       <td colspan="4" class="text-right"><button class="btn btn-primary" [routerLink]="['/', 'create-bill']">Add Bill</button></td>

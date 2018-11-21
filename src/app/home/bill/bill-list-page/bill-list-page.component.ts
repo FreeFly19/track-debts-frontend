@@ -22,7 +22,7 @@ export class BillListPageComponent implements OnInit {
       .pipe(
         map(params => Object.assign({}, {page: 1}, params)),
         tap(params => params.page = params.page - 1),
-        switchMap(params => this.http.get<Page<Bill>>('/api/bills?page=' + params.page))
+        switchMap(params => this.http.get<Page<Bill>>('/api/bills?page=' + params.page + '&size=10'))
       )
       .subscribe(bills => this.bills = bills);
   }

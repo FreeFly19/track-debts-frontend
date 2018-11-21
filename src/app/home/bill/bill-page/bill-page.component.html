@@ -22,7 +22,7 @@
       <th>Amount</th>
       <th>Cost</th>
       <th>Participants</th>
-      <th *ngIf="!bill.locked"></th>
+      <th *ngIf="!bill.locked && isBillCreator()"></th>
     </tr>
     </thead>
     <tbody>
@@ -39,11 +39,11 @@
         </div>
         <button class="btn btn-link" *ngIf="!bill.locked" (click)="setCoefficient(item, '1')">+</button>
       </td>
-      <td *ngIf="!bill.locked">
+      <td *ngIf="!bill.locked && isBillCreator()">
         <button class="btn btn-danger">Drop</button>
       </td>
     </tr>
-    <tr *ngIf="!bill.locked">
+    <tr *ngIf="!bill.locked && isBillCreator()">
       <td><input type="text" id="title" #title></td>
       <td><input type="text" id="amount" #amount></td>
       <td><input type="text" id="cost" #cost></td>

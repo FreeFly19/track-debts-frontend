@@ -35,9 +35,14 @@
       <td>{{item.cost}}</td>
       <td>
         <div *ngFor="let p of item.participants">
-          {{p.user.email}} – <b>{{p.coefficient}}</b>
+          {{p.user.email}}: <b>{{p.coefficient}}</b>
+          <button class="btn btn-link btn-sm"
+                  *ngIf="!bill.locked && isCurrentUser(p)"
+                  (click)="setCoefficient(item, '0')">X</button>
         </div>
-        <button class="btn btn-link" *ngIf="!bill.locked" (click)="setCoefficient(item, '1')">+</button>
+        <button class="btn btn-sm btn-primary"
+                *ngIf="!bill.locked && !alreadySetCoefficient(item)"
+                (click)="setCoefficient(item, '1')">+</button>
       </td>
       <td *ngIf="!bill.locked && isBillCreator()">
         <button class="btn btn-danger" (click)="dropItem(item)">Drop</button>

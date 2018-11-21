@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Bill} from '../../../core/bill/bill';
 import {AddBillItemCommand} from '../../../core/bill/add-bill-item-command';
-import {BillItem} from '../../../core/bill/bill-item';
+import {BillItem, BillItemParticipant} from '../../../core/bill/bill-item';
 import {UserService} from '../../../core/user.service';
 
 @Component({
@@ -46,5 +46,13 @@ export class BillPageComponent implements OnInit {
 
   isBillCreator() {
     return this.userService.currentUser.id === this.bill.createdBy.id;
+  }
+
+  alreadySetCoefficient(item: BillItem) {
+    return !!item.participants.find(p => p.user.id === this.userService.currentUser.id);
+  }
+
+  isCurrentUser(p: BillItemParticipant) {
+    return p.user.id === this.userService.currentUser.id;
   }
 }

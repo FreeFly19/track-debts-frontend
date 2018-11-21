@@ -40,7 +40,7 @@
         <button class="btn btn-link" *ngIf="!bill.locked" (click)="setCoefficient(item, '1')">+</button>
       </td>
       <td *ngIf="!bill.locked && isBillCreator()">
-        <button class="btn btn-danger">Drop</button>
+        <button class="btn btn-danger" (click)="dropItem(item)">Drop</button>
       </td>
     </tr>
     <tr *ngIf="!bill.locked && isBillCreator()">

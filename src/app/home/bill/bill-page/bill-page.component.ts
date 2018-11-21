@@ -27,7 +27,11 @@ export class BillPageComponent implements OnInit {
   addItem(cmd: AddBillItemCommand) {
     this.http.post('/api/bills/' + this.bill.id + '/items', cmd)
       .subscribe(() => this.ngOnInit());
+  }
 
+  dropItem(item: BillItem) {
+    this.http.delete('/api/bills/' + this.bill.id + '/items/' + item.id)
+      .subscribe(() => this.ngOnInit());
   }
 
   setCoefficient(item: BillItem, coefficient: string) {

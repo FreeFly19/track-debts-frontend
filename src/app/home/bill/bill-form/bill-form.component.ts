@@ -19,9 +19,10 @@ export class BillFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    const d = new Date();
     this.billForm = this.fb.group({
       title: ['', Validators.required],
-      date: [new Date().getTime(), Validators.required]
+      date: [d.getUTCFullYear() + '-' + d.getUTCMonth() + '-' + d.getUTCDate(), Validators.required]
     });
 
     if (this.bill) {
@@ -30,6 +31,9 @@ export class BillFormComponent implements OnInit {
   }
 
   submit() {
-    this.created.emit(this.billForm.value);
+    this.created.emit({
+      title: this.billForm.value.title,
+      date: new Date(this.billForm.value.date).getTime()
+    });
   }
 }

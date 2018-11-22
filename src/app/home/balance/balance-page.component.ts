@@ -29,6 +29,7 @@ export class BalancePageComponent implements OnInit {
           mode: 'popup'
         }).on('liqpay.callback', (data) => {
             this.toastr.info('Your transaction is processing. Current status: "' + data.status + '"');
+            setTimeout(this.ngOnInit, 5000);
         });
       });
   }

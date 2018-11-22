@@ -1,0 +1,16 @@
+<form (submit)="submit()" [formGroup]="userForm">
+  <div class="form-group">
+    <label for="bill-form-first-name">First Name</label>
+    <input class="form-control" type="text" id="bill-form-first-name" formControlName="firstName">
+  </div>
+  <div class="form-group">
+    <label for="bill-form-last-name">Last Name</label>
+    <input class="form-control" type="text" id="bill-form-last-name" formControlName="lastName">
+  </div>
+  <div class="form-group">
+    <label for="bill-form-card-number">Card Number</label>
+    <input class="form-control" type="text" id="bill-form-card-number" formControlName="cardNumber">
+  </div>
+
+  <button class="btn btn-primary">Save</button>
+</form>

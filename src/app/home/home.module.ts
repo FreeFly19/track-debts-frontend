@@ -10,6 +10,8 @@ import {BillListPageComponent} from './bill/bill-list-page/bill-list-page.compon
 import {BillPageComponent} from './bill/bill-page/bill-page.component';
 import { TransactionListPageComponent } from './transaction/transaction-list-page/transaction-list-page.component';
 import {BalancePageComponent} from './balance/balance-page.component';
+import {UserPageComponent} from './user/user-page.component';
+import {UserFormComponent} from './user/user-form/user-form.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import {BalancePageComponent} from './balance/balance-page.component';
         component: HomeComponent,
         children: [
           {path: '', redirectTo: 'balance'},
+          {path: 'user', component: UserPageComponent},
           {path: 'bills', component: BillListPageComponent},
           {path: 'create-bill', component: CreateBillPageComponent},
           {path: 'bill/:id', component: BillPageComponent},
@@ -33,8 +36,10 @@ import {BalancePageComponent} from './balance/balance-page.component';
   ],
   declarations: [
     HomeComponent,
-    BillPageComponent,
+    UserFormComponent,
+    UserPageComponent,
     BillFormComponent,
+    BillPageComponent,
     BalancePageComponent,
     BillListPageComponent,
     CreateBillPageComponent,

@@ -5,5 +5,5 @@ interface User {
   lastName?: string;
   fullName?: string;
   cardNumber?: string;
-  canAcceptPayment: boolean;
+  canAcceptPayment?: boolean;
 }

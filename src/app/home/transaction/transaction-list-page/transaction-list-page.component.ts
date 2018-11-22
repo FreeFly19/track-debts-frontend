@@ -37,27 +37,6 @@ export class TransactionListPageComponent implements OnInit {
       'senderId': ['', Validators.compose([Validators.required, Validators.min(1)])],
       'amount': ['', Validators.compose([Validators.required, Validators.min(1)])]
     });
-
-    this.http.get<any>('/api/liqpay/generate')
-      .subscribe(res => {
-        console.log(res);
-        // @ts-ignore
-        LiqPayCheckout.init({
-          data: res.data,
-          signature: res.signature,
-          language: "ru",
-          mode: "popup"
-        }).on("liqpay.callback", function(data){
-          console.log("liqpay.callback");
-          console.log(data);
-        }).on("liqpay.ready", function(data){
-          console.log("liqpay.ready");
-          console.log(data);
-        }).on("liqpay.close", function(data){
-          console.log("liqpay.close");
-          console.log(data);
-        });
-      });
   }
 
   loadPage(page) {

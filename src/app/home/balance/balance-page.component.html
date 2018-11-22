@@ -3,12 +3,17 @@
   <tr>
     <th>User</th>
     <th>Money</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let b of balanceItems">
     <td>{{b.user.email}}</td>
     <td [class.text-danger]="b.balance < 0" [class.text-success]="b.balance > 0">{{b.balance}}</td>
+    <td>
+      <button *ngIf="b.balance < 0 && b.user.canAcceptPayment"
+              class="btn btn-primary"
+              (click)="pay(b)">Pay Online</button></td>
   </tr>
   </tbody>
 </table>

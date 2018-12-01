@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td class="text-right">Initiator</td>
-      <th>{{bill.createdBy.email}}</th>
+      <th>{{bill.createdBy.displayName}}</th>
     </tr>
   </table>
 
@@ -35,7 +35,7 @@
       <td>{{item.cost}}</td>
       <td>
         <div *ngFor="let p of item.participants">
-          {{p.user.email}}: <b>{{p.coefficient}}</b>
+          {{p.user.displayName}}: <b>{{p.coefficient}}</b>
           <button class="btn btn-link btn-sm"
                   *ngIf="!bill.locked && isCurrentUser(p)"
                   (click)="setCoefficient(item, '0')">X</button>

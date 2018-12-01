@@ -23,7 +23,7 @@
     <tr *ngFor="let bill of bills.content">
       <td>{{bill.locked ? 'Locked' : 'Active'}}</td>
       <td><a [routerLink]="['/', 'bill', bill.id]">{{bill.title}}</a></td>
-      <td>{{bill.createdBy.email}}</td>
+      <td>{{bill.createdBy.displayName}}</td>
       <td>
         <div>{{bill.date | date: 'dd-MM-yyyy'}}</div>
         <div style="font-size: 0.6em;">{{bill.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</div>

@@ -11,7 +11,7 @@
           <select class="form-control" id="senderId" formControlName="senderId"
                   [class.is-invalid]="acceptMoneyForm.get('senderId').dirty && acceptMoneyForm.get('senderId').invalid">
             <option value="" selected>Select User</option>
-            <option *ngFor="let u of users" [ngValue]="u.id">{{u.email}}</option>
+            <option *ngFor="let u of users" [ngValue]="u.id">{{u.displayName}}</option>
           </select>
         </div>
         <div class="form-group">
@@ -40,8 +40,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let t of transactions.content">
-      <td>{{t.sender.email}}</td>
-      <td>{{t.receiver.email}}</td>
+      <td>{{t.sender.displayName}}</td>
+      <td>{{t.receiver.displayName}}</td>
       <td>{{t.amount}}</td>
       <td>{{t.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
       <td>

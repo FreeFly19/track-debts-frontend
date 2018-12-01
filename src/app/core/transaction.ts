@@ -6,4 +6,5 @@ export interface Transaction {
   amount: string;
   createdAt: number;
   bill: Bill;
+  type: string;
 }

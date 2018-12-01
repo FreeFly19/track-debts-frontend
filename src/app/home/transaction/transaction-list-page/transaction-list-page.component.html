@@ -45,8 +45,9 @@
       <td>{{t.amount}}</td>
       <td>{{t.createdAt | date: 'dd-MM-yyyy hh:mm:ss a'}}</td>
       <td>
-        <a *ngIf="t.bill" [routerLink]="['/', 'bill', t.bill.id]">#{{t.bill.id}} {{t.bill.title}}</a>
-        <span *ngIf="!t.bill">Manual</span>
+        <a *ngIf="t.type === 'BILL'" [routerLink]="['/', 'bill', t.bill.id]">#{{t.bill.id}} {{t.bill.title}}</a>
+        <span *ngIf="t.type === 'MANUAL'">Manual</span>
+        <span *ngIf="t.type === 'LIQPAY'">LiqPay</span>
       </td>
     </tr>
     </tbody>

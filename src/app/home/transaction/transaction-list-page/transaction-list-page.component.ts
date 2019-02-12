@@ -35,7 +35,8 @@ export class TransactionListPageComponent implements OnInit {
 
     this.acceptMoneyForm = this.fb.group({
       'senderId': ['', Validators.compose([Validators.required, Validators.min(1)])],
-      'amount': ['', Validators.compose([Validators.required, Validators.min(1)])]
+      'amount': ['', Validators.compose([Validators.required, Validators.min(1)])],
+      'comment': ['', Validators.compose([Validators.required, Validators.min(1)])]
     });
   }
 

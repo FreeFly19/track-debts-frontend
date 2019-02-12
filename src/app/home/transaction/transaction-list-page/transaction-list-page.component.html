@@ -19,6 +19,11 @@
           <input type="text" class="form-control" id="amount" formControlName="amount"
                  [class.is-invalid]="acceptMoneyForm.get('amount').dirty && acceptMoneyForm.get('amount').invalid">
         </div>
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <input type="text" class="form-control" id="comment" formControlName="comment"
+                 [class.is-invalid]="acceptMoneyForm.get('comment').dirty && acceptMoneyForm.get('comment').invalid">
+        </div>
         <div class="text-right">
           <button class="btn btn-primary" [disabled]="acceptMoneyForm.disabled || acceptMoneyForm.invalid">Accept</button>
         </div>

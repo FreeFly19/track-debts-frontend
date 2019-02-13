@@ -41,6 +41,7 @@
       <th>Amount</th>
       <th>Date</th>
       <th>Bill</th>
+      <th>Comment</th>
     </tr>
     </thead>
     <tbody>
@@ -54,6 +55,7 @@
         <span *ngIf="t.type === 'MANUAL'">Manual</span>
         <span *ngIf="t.type === 'LIQPAY'">LiqPay</span>
       </td>
+      <td class="comment">{{t.comment}}</td>
     </tr>
     </tbody>
 

@@ -9,7 +9,8 @@ import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-transaction-list-page',
-  templateUrl: './transaction-list-page.component.html'
+  templateUrl: './transaction-list-page.component.html',
+  styleUrls: ['./transaction-list-page.component.scss']
 })
 export class TransactionListPageComponent implements OnInit {
   transactions?: Page<Transaction>;
@@ -36,7 +37,7 @@ export class TransactionListPageComponent implements OnInit {
     this.acceptMoneyForm = this.fb.group({
       'senderId': ['', Validators.compose([Validators.required, Validators.min(1)])],
       'amount': ['', Validators.compose([Validators.required, Validators.min(1)])],
-      'comment': ['', Validators.compose([Validators.required, Validators.min(1)])]
+      'comment': ['', Validators.maxLength(200)]
     });
   }
 

@@ -7,4 +7,5 @@ export interface Transaction {
   createdAt: number;
   bill: Bill;
   type: string;
+  comment: string;
 }

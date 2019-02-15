@@ -40,9 +40,11 @@
                   *ngIf="!bill.locked && isCurrentUser(p)"
                   (click)="setCoefficient(item, '0')">X</button>
         </div>
-        <button class="btn btn-sm btn-primary"
-                *ngIf="!bill.locked && !alreadySetCoefficient(item)"
-                (click)="setCoefficient(item, '1')">+</button>
+        <div *ngIf="!bill.locked && !alreadySetCoefficient(item)">
+          <input type="number" #amount style="width: 50px;" value="1">
+          <button class="btn btn-sm btn-primary"
+                  (click)="setCoefficient(item, amount.value)">Set</button>
+        </div>
       </td>
       <td *ngIf="!bill.locked && isBillCreator()">
         <button class="btn btn-danger" (click)="dropItem(item)">Drop</button>

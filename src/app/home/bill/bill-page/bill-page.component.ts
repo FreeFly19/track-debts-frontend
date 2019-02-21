@@ -15,6 +15,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class BillPageComponent implements OnInit {
   bill?: Bill;
   users: User[] = [];
+  billUsers: User[] = [];
   addBillUserForm: FormGroup;
 
   constructor(private http: HttpClient,
@@ -24,11 +25,15 @@ export class BillPageComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.http.get<Bill>('/api/bills/' + this.route.snapshot.params['id'])
+    const billId = this.route.snapshot.params['id'];
+    this.http.get<Bill>('/api/bills/' + billId)
       .subscribe(bill => this.bill = bill);
 
     this.http.get<User[]>('/api/users')
       .subscribe(users => this.users = users);
+
+    this.http.get<User[]>('/api/bills/' + billId + '/users')
+      .subscribe(billUsers => this.billUsers = billUsers);
 
     this.addBillUserForm = this.fb.group({
       'billUserId': ['', Validators.compose([Validators.required, Validators.min(1)])]
@@ -68,7 +73,7 @@ export class BillPageComponent implements OnInit {
   }
 
   addBillUser() {
-    this.http.post('/api/bill/' + this.bill.id + '/users', this.addBillUserForm.value)
+    this.http.put('/api/bills/' + this.bill.id + '/users', this.addBillUserForm.value)
       .subscribe(() => this.ngOnInit());
   }
 }

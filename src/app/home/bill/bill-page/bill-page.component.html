@@ -31,6 +31,10 @@
         <div class="text-right">
           <button class="btn btn-primary" (click)="addBillUser()">Add</button>
         </div>
+
+      <ul>
+        <li *ngFor="let u of billUsers">{{u.displayName}}</li>
+      </ul>
       </div>
   </form>
   </div>

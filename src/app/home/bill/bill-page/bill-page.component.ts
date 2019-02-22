@@ -6,6 +6,7 @@ import {AddBillItemCommand} from '../../../core/bill/add-bill-item-command';
 import {BillItem, BillItemParticipant} from '../../../core/bill/bill-item';
 import {UserService} from '../../../core/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BillUser} from '../../../core/bill/bill-user';
 
 @Component({
   selector: 'app-create-bill-page',
@@ -75,5 +76,9 @@ export class BillPageComponent implements OnInit {
   addBillUser() {
     this.http.put('/api/bills/' + this.bill.id + '/users', this.addBillUserForm.value)
       .subscribe(() => this.ngOnInit());
+  }
+
+  deleteBillUser(user: User) {
+    this.http.delete('/api/bills/' + this.bill.id + '/users/' + user.id).subscribe(() => this.ngOnInit());
   }
 }

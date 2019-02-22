@@ -32,9 +32,12 @@
           <button class="btn btn-primary" (click)="addBillUser()">Add</button>
         </div>
 
-      <ul>
-        <li *ngFor="let u of billUsers">{{u.displayName}}</li>
-      </ul>
+        <ul>
+          <li *ngFor="let u of billUsers">
+            {{u.displayName}}
+            <button class="btn btn-link btn-sm" (click)="deleteBillUser(u)">X</button>
+          </li>
+        </ul>
       </div>
   </form>
   </div>

@@ -16,7 +16,7 @@ import {BillUser} from '../../../core/bill/bill-user';
 export class BillPageComponent implements OnInit {
   bill?: Bill;
   users: User[] = [];
-  billUsers: User[] = [];
+  billUsers: BillUser[] = [];
   addBillUserForm: FormGroup;
 
   constructor(private http: HttpClient,
@@ -33,11 +33,11 @@ export class BillPageComponent implements OnInit {
     this.http.get<User[]>('/api/users')
       .subscribe(users => this.users = users);
 
-    this.http.get<User[]>('/api/bills/' + billId + '/users')
+    this.http.get<BillUser[]>('/api/bills/' + billId + '/users')
       .subscribe(billUsers => this.billUsers = billUsers);
 
     this.addBillUserForm = this.fb.group({
-      'billUserId': ['', Validators.compose([Validators.required, Validators.min(1)])]
+      'userId': ['', Validators.compose([Validators.required, Validators.min(1)])]
     });
   }
 
@@ -74,11 +74,17 @@ export class BillPageComponent implements OnInit {
   }
 
   addBillUser() {
+    this.addBillUserForm.get('userId').markAsDirty();
+    if (!this.addBillUserForm.valid) {
+      return;
+    }
+
     this.http.put('/api/bills/' + this.bill.id + '/users', this.addBillUserForm.value)
       .subscribe(() => this.ngOnInit());
   }
 
-  deleteBillUser(user: User) {
-    this.http.delete('/api/bills/' + this.bill.id + '/users/' + user.id).subscribe(() => this.ngOnInit());
+  deleteBillUser(billUserId: number) {
+    this.http.delete('/api/bills/' + this.bill.id + '/users/' + billUserId)
+      .subscribe(() => this.ngOnInit());
   }
 }

@@ -22,7 +22,8 @@
   <div class="card-body">
   <form [formGroup]="addBillUserForm" (submit)="addBillUser()">
     <div class="form-group">
-        <label for="billUser">Select users</label>
+      <div *ngIf="!bill.locked && isBillCreator()">
+        <label for="billUser">Users</label>
         <select class="form-control" id="billUser" formControlName="userId"
                 [class.is-invalid]="addBillUserForm.get('userId').dirty && addBillUserForm.get('userId').invalid">
           <option value="" selected>Select User</option>
@@ -31,11 +32,12 @@
         <div class="text-right">
           <button class="btn btn-primary">Add</button>
         </div>
+     </div>
 
         <ul>
           <li *ngFor="let bu of billUsers">
             {{bu.user.displayName}}
-            <button class="btn btn-link btn-sm" (click)="deleteBillUser(bu.id)">X</button>
+            <button *ngIf="!bill.locked && isBillCreator()" class="btn btn-link btn-sm" (click)="deleteBillUser(bu.id)">X</button>
           </li>
         </ul>
       </div>

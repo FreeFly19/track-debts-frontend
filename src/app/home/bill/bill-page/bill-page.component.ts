@@ -31,7 +31,7 @@ export class BillPageComponent implements OnInit {
       .subscribe(bill => this.bill = bill);
 
     this.http.get<User[]>('/api/users')
-      .subscribe(users => this.users = users);
+      .subscribe(users => this.users = users.filter((object) => object.id !== this.userService.currentUser.id));
 
     this.http.get<BillUser[]>('/api/bills/' + billId + '/users')
       .subscribe(billUsers => this.billUsers = billUsers);

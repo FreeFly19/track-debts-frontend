@@ -33,15 +33,16 @@
           <button class="btn btn-primary">Add</button>
         </div>
      </div>
-
-        <ul>
-          <li *ngFor="let bu of billUsers">
-            {{bu.user.displayName}}
-            <button *ngIf="!bill.locked && isBillCreator()" class="btn btn-link btn-sm" (click)="deleteBillUser(bu.id)">X</button>
-          </li>
-        </ul>
       </div>
   </form>
+    <div>
+      <ul>
+        <li *ngFor="let bu of billUsers">
+          {{bu.user.displayName}}
+          <button *ngIf="!bill.locked && isBillCreator() && !checkBillCreatorByUserId(bu.user.id)" class="btn btn-link btn-sm" (click)="deleteBillUser(bu.id)">X</button>
+        </li>
+      </ul>
+    </div>
   </div>
   </div>
 

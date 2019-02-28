@@ -30,10 +30,10 @@ export class BillPageComponent implements OnInit {
     this.http.get<Bill>('/api/bills/' + billId)
       .subscribe(bill => this.bill = bill);
 
-    this.http.get<User[]>('/api/users')
-      .subscribe(users => this.users = users.filter((object) => object.id !== this.userService.currentUser.id));
+    this.http.get<User[]>('/api/bills/' + billId + '/users')
+      .subscribe(users => this.users = users);
 
-    this.http.get<BillUser[]>('/api/bills/' + billId + '/users')
+    this.http.get<BillUser[]>('/api/bills/' + billId + '/members')
       .subscribe(billUsers => this.billUsers = billUsers);
 
     this.addBillUserForm = this.fb.group({
@@ -65,6 +65,10 @@ export class BillPageComponent implements OnInit {
     return this.userService.currentUser.id === this.bill.createdBy.id;
   }
 
+  checkBillCreatorByUserId(id: number) {
+    return id === this.bill.createdBy.id;
+  }
+
   alreadySetCoefficient(item: BillItem) {
     return !!item.participants.find(p => p.user.id === this.userService.currentUser.id);
   }
@@ -79,12 +83,12 @@ export class BillPageComponent implements OnInit {
       return;
     }
 
-    this.http.put('/api/bills/' + this.bill.id + '/users', this.addBillUserForm.value)
+    this.http.put('/api/bills/' + this.bill.id + '/members', this.addBillUserForm.value)
       .subscribe(() => this.ngOnInit());
   }
 
   deleteBillUser(billUserId: number) {
-    this.http.delete('/api/bills/' + this.bill.id + '/users/' + billUserId)
+    this.http.delete('/api/bills/' + this.bill.id + '/members/' + billUserId)
       .subscribe(() => this.ngOnInit());
   }
 }

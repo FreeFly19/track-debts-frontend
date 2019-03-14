@@ -7,6 +7,8 @@ import {BillItem, BillItemParticipant} from '../../../core/bill/bill-item';
 import {UserService} from '../../../core/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BillUser} from '../../../core/bill/bill-user';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-create-bill-page',
@@ -18,6 +20,35 @@ export class BillPageComponent implements OnInit {
   users: User[] = [];
   billUsers: BillUser[] = [];
   addBillUserForm: FormGroup;
+  titleProduct: any;
+  searching = false;
+  searchFailed = false;
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.autocomplete(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    )
+
+  autocomplete(term: string) {
+    if (term === '') {
+      return of([]);
+    }
+
+    const billId = this.route.snapshot.params['id'];
+    return this.http.get<BillItem[]>('/api/bills/' + billId + '/autocompleteItem', { params: {'product': term} })
+      .pipe(map(result => result.map(object => object.title)));
+  }
 
   constructor(private http: HttpClient,
               private fb: FormBuilder,

@@ -4,7 +4,7 @@ import {HomeComponent} from './home.component';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {BillFormComponent} from './bill/bill-form/bill-form.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CreateBillPageComponent} from './bill/create-bill-page/create-bill-page.component';
 import {BillListPageComponent} from './bill/bill-list-page/bill-list-page.component';
 import {BillPageComponent} from './bill/bill-page/bill-page.component';
@@ -12,12 +12,15 @@ import { TransactionListPageComponent } from './transaction/transaction-list-pag
 import {BalancePageComponent} from './balance/balance-page.component';
 import {UserPageComponent} from './user/user-page.component';
 import {UserFormComponent} from './user/user-form/user-form.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    FormsModule,
+    NgbModule.forRoot(),
     RouterModule.forChild([
       {
         path: '',

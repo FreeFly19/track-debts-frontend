@@ -23,32 +23,7 @@ export class BillPageComponent implements OnInit {
   titleProduct: any;
   searching = false;
   searchFailed = false;
-
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap(() => this.searching = true),
-      switchMap(term =>
-        this.autocomplete(term).pipe(
-          tap(() => this.searchFailed = false),
-          catchError(() => {
-            this.searchFailed = true;
-            return of([]);
-          }))
-      ),
-      tap(() => this.searching = false)
-    )
-
-  autocomplete(term: string) {
-    if (term === '') {
-      return of([]);
-    }
-
-    const billId = this.route.snapshot.params['id'];
-    return this.http.get<BillItem[]>('/api/bills/' + billId + '/autocompleteItem', { params: {'product': term} })
-      .pipe(map(result => result.map(object => object.title)));
-  }
+  costProduct: number;
 
   constructor(private http: HttpClient,
               private fb: FormBuilder,
@@ -121,5 +96,41 @@ export class BillPageComponent implements OnInit {
   deleteBillUser(billUserId: number) {
     this.http.delete('/api/bills/' + this.bill.id + '/members/' + billUserId)
       .subscribe(() => this.ngOnInit());
+  }
+
+
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.autocomplete(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    );
+  }
+
+  formatter = (result: any) => {
+    return result.title;
+  }
+
+  autocomplete = (term: string) => {
+    if (term === '') {
+      return of([]);
+    }
+
+    const billId = this.route.snapshot.params['id'];
+
+    return this.http.get<BillItem[]>('/api/bills/' + billId + '/autocompleteItem', { params: {'product': term} });
+  }
+
+  selectedItem = (event) => {
+    this.costProduct = event.item.cost;
   }
 }

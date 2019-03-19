@@ -20,7 +20,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     RouterModule.forChild([
       {
         path: '',

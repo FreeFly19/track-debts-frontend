@@ -85,12 +85,17 @@
     </tr>
     <tr *ngIf="!bill.locked && isBillCreator()">
       <td>
-        <input type="text" id="title" #title [(ngModel)]="titleProduct" [ngbTypeahead]="search"/>
+        <input type="text" id="title" #title
+               [(ngModel)]="titleProduct"
+               [ngbTypeahead]="search"
+               (selectItem)="selectedItem($event)"
+               [inputFormatter]="formatter"
+               [resultFormatter]="formatter"/>
         <div *ngIf="searching">searching...</div>
         <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </td>
       <td><input type="text" id="amount" #amount></td>
-      <td><input type="text" id="cost" #cost></td>
+      <td><input type="text" id="cost" [(ngModel)]="costProduct" #cost></td>
       <td>No Attached Participants</td>
       <td>
         <button class="btn btn-success" (click)="addItem({title: title.value, amount: amount.value, cost: cost.value})">
@@ -100,3 +105,4 @@
     </tr>
     </tbody>
   </table>
+</div>

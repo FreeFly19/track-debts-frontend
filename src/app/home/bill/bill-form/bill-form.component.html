@@ -1,7 +1,9 @@
 <form (submit)="submit()" [formGroup]="billForm">
   <div class="form-group">
     <label for="bill-form-title">Title</label>
-    <input class="form-control" type="text" id="bill-form-title" formControlName="title">
+    <input class="form-control" type="text" id="bill-form-title" formControlName="title" [(ngModel)]="titleRestaurant" [ngbTypeahead]="search">
+    <div *ngIf="searching">searching...</div>
+    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
   </div>
 
   <div class="form-group">

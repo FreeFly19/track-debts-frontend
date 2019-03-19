@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bill} from '../../../core/bill/bill';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AddBillCommand} from '../../../core/bill/add-bill-command';
+import {Observable, of} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-bill-form',
@@ -15,8 +18,37 @@ export class BillFormComponent implements OnInit {
   created: EventEmitter<AddBillCommand> = new EventEmitter();
 
   billForm: FormGroup;
+  titleRestaurant: any;
+  searching = false;
+  searchFailed = false;
 
-  constructor(private fb: FormBuilder) {}
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.autocomplete(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    )
+
+  autocomplete(term: string) {
+    if (term === '') {
+      return of([]);
+    }
+
+    return this.http.get<Bill[]>('/api/bills/autocompleteRestaurant', { params: {'restaurant': term} })
+      .pipe(map(result => result.map(object => object.title)));
+  }
+
+  constructor(private http: HttpClient,
+              private fb: FormBuilder) {}
 
   ngOnInit() {
     const d = new Date();

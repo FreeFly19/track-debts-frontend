@@ -21,7 +21,6 @@ export class BillPageComponent implements OnInit {
   billUsers: BillUser[] = [];
   addBillUserForm: FormGroup;
   titleProduct: any;
-  searching = false;
   searchFailed = false;
   costProduct: number;
 
@@ -103,7 +102,6 @@ export class BillPageComponent implements OnInit {
     return text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap(() => this.searching = true),
       switchMap(term =>
         this.autocomplete(term).pipe(
           tap(() => this.searchFailed = false),
@@ -111,8 +109,7 @@ export class BillPageComponent implements OnInit {
             this.searchFailed = true;
             return of([]);
           }))
-      ),
-      tap(() => this.searching = false)
+      )
     );
   }
 

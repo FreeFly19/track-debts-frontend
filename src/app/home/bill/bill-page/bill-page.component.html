@@ -91,7 +91,6 @@
                (selectItem)="selectedItem($event)"
                [inputFormatter]="formatter"
                [resultFormatter]="formatter"/>
-        <div *ngIf="searching">searching...</div>
         <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </td>
       <td><input type="text" id="amount" #amount></td>

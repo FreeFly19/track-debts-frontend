@@ -19,14 +19,12 @@ export class BillFormComponent implements OnInit {
 
   billForm: FormGroup;
   titleRestaurant: any;
-  searching = false;
   searchFailed = false;
 
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap(() => this.searching = true),
       switchMap(term =>
         this.autocomplete(term).pipe(
           tap(() => this.searchFailed = false),
@@ -34,8 +32,7 @@ export class BillFormComponent implements OnInit {
             this.searchFailed = true;
             return of([]);
           }))
-      ),
-      tap(() => this.searching = false)
+      )
     )
 
   autocomplete(term: string) {
@@ -43,7 +40,7 @@ export class BillFormComponent implements OnInit {
       return of([]);
     }
 
-    return this.http.get<Bill[]>('/api/bills/autocompleteRestaurant', { params: {'restaurant': term} })
+    return this.http.get<Bill[]>('/api/bill-names', { params: {'search': term} })
       .pipe(map(result => result.map(object => object.title)));
   }
 

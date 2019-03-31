@@ -18,7 +18,7 @@ export class BillFormComponent implements OnInit {
   created: EventEmitter<AddBillCommand> = new EventEmitter();
 
   billForm: FormGroup;
-  titleRestaurant: any;
+  billTitle: any;
   searchFailed = false;
 
   search = (text$: Observable<string>) =>
@@ -40,8 +40,7 @@ export class BillFormComponent implements OnInit {
       return of([]);
     }
 
-    return this.http.get<Bill[]>('/api/bill-names', { params: {'search': term} })
-      .pipe(map(result => result.map(object => object.title)));
+    return this.http.get<Bill[]>('/api/bill-names', { params: {'search': term} });
   }
 
   constructor(private http: HttpClient,
